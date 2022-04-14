@@ -1,0 +1,38 @@
+require("dotenv").config();
+let mongoose = require("mongoose");
+const User = require("./models/User");
+const Product = require("./models/Product");
+const bodyParser = require('body-parser')
+const productRoute = require("./routes/product");
+var cors = require('cors')
+
+
+//return the addition for two integers
+
+
+const express = require("express");
+const app = express();
+app.use(cors())
+
+
+// Connect To DataBase
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Database connection successful");
+  })
+  .catch((err) => {
+    console.error("Database connection error");
+  });
+
+  // parse application/x-www-form-urlencoded
+app.use(bodyParser.json())
+
+app.use("/api/v1/product",productRoute)
+
+app.listen(process.env.PORT || 3000, function () {
+  console.log("server Started !!");
+});
