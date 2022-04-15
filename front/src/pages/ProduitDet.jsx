@@ -4,11 +4,14 @@ import ProduitList from "../components/ProduitList";
 import ScrollAnimation from "react-animate-on-scroll";
 import axios from "axios";
 import { useParams } from "react-router";
+import { addProduct } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
 function ProduitDet() {
   const [product, setProduct] = useState(null);
   const [color, setColor] = useState(0);
   const [size, setSize] = useState("s");
   let { id } = useParams();
+  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/v1/product/find/${id}`)
@@ -17,7 +20,14 @@ function ProduitDet() {
         setProduct(response.data);
       });
   }, []);
-
+const addToCart = () => {
+  dispatch(addProduct({
+...product,
+    color: color,
+    size: size,
+    quantity:1,
+    }));
+};
   return (
     <>
       <Nav />
@@ -31,6 +41,10 @@ function ProduitDet() {
           </div>
           <div className="info">
             <h1>{product.title}</h1>
+            {
+              product.colors.length>0 && (
+
+<>
             <div className="colors">
               <h3>PICK COLOR: {product.colors[color].name}</h3>
               <div>
@@ -72,6 +86,26 @@ function ProduitDet() {
             </div>
             </>
             }
+            </>
+              )
+            }
+
+            {
+              product.options.map((o, index) => (
+                <div key={index} className="option">
+                  <h3>{o.name}</h3>
+                  {
+                    Object.entries(o.option).map(([valueName, value]) => (
+                      <div
+                        key={valueName}
+                      >
+                        {valueName}
+                      </div>
+                    ))
+                  }
+                </div>
+              ))
+            }
             <div className="detai">
                 <details>
                 <summary>PRODUCT INFORMATION</summary>
@@ -81,7 +115,7 @@ function ProduitDet() {
               </div>
             <div className="add__cart">
               <div>
-                <button type="submit">Add to cart</button>
+                <button className="btn" type="submit" onClick={() => addToCart()}>Add to cart</button>
               </div>
 
               <div>

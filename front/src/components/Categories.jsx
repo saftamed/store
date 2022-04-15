@@ -7,7 +7,7 @@ function Categories() {
     <div className="container">
       <div className="flex flex-d-c">
         <div>
-          <Link to={"/produits/gear"}>
+          <Link to={"/produits/LTT"}>
           
           <div>
             <h3>Clothing</h3>
@@ -20,7 +20,7 @@ function Categories() {
           </Link>
         </div>
         <div>
-        <Link to={"/produits/gear"}>
+        <Link to={"/produits/phone"}>
           <div>
             <h3>Gear</h3>
           </div>

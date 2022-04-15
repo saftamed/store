@@ -27,11 +27,15 @@ productRouter.get("/", async (req, res) => {
       if (qNew) {
         products = await Product.find().sort({ createdAt: -1 }).limit(1);
       } else if (qCategory) {
+        if(qCategory === "all"){
+          products = await Product.find();
+        }else{
         products = await Product.find({
           categories: {
             $in: [qCategory],
           },
         });
+        }
       } else {
         products = await Product.find().limit(10);
       }

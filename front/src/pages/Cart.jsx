@@ -1,17 +1,20 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import CartProduit from '../components/CartProduit'
 import Nav from '../components/Nav'
 
 function Cart() {
-  return (
+    const cart = useSelector((state) => state.cart);
+    return (
     <>
         <Nav/>
         <div className="cart">
           <h1>YOUR CART        </h1>
           <div className="content">
               <div className="items">
-                 <CartProduit/>
-                 <CartProduit/>
+                  {
+                        cart.products.map(item => <CartProduit key={item._id} item={item}/>)
+                  }
               </div>
               <div className="checkout">
                   <h2>ORDER SUMMARY</h2>
@@ -34,7 +37,7 @@ function Cart() {
                   </div>
                   <div className="sum totf">
                       <span>Total</span>
-                      <span>$95.99</span>
+                      <span>${Math.abs((cart.total).toFixed(2))}</span>
                   </div>
                   <div className="btn">
                       Check Out

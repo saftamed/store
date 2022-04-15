@@ -5,12 +5,16 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import ScrollToTop from "./components/ScrollToTop";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 ReactDOM.render(
+  <Provider store={store}>
   <BrowserRouter>
     <ScrollToTop />
     <App />
-  </BrowserRouter>,
+  </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
