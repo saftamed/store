@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import {Link } from "react-router-dom";
 function Nav() {
 const quantity = useSelector((state) => state.cart.quantity);
+const user = useSelector((state) => state.user.currentUser);
+
   return (
     <>
       <div className="annoncement">
@@ -39,14 +41,16 @@ const quantity = useSelector((state) => state.cart.quantity);
             </h1>
           </div>
           <div className="right">
-            <div>
-              <Link to={"/login"}>
-              
-              <span className="login-link">
-                Login
-              </span>
-              </Link>
-            </div>
+            {user === null && (
+                          <div>
+                          <Link to={"/login"}>
+                          
+                          <span className="login-link">
+                            Login
+                          </span>
+                          </Link>
+                        </div>
+                        ) }
               <Link to={"/cart"}>
             <div className="cart">
 

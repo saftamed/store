@@ -4,6 +4,7 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const bodyParser = require('body-parser')
 const productRoute = require("./routes/product");
+const authRoute = require("./routes/auth");
 var cors = require('cors')
 
 
@@ -32,6 +33,11 @@ mongoose
 app.use(bodyParser.json())
 
 app.use("/api/v1/product",productRoute)
+
+app.use("/api/v1/user",productRoute)
+
+app.use("/api/v1/auth",authRoute)
+
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("server Started !!");

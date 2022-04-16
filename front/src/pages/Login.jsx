@@ -1,26 +1,40 @@
 import React from 'react'
 import {Link } from "react-router-dom";
-
+import { login } from '../store/userApi';
+import { useDispatch } from 'react-redux';
 function Login() {
+  const dispatch = useDispatch();
+  const updateForm = (e) => {
+    setUser(
+      {
+        ...user,
+        [e.target.name]: e.target.value
+      }
+    )
+  }
+  const [user, setUser] = React.useState({
+    email: '',
+    password: ''
+  });
   return (
     <div className="login-con">
     <div>
         <h1>Login</h1>
         <div>
            <div>
-              <label for="">Email or UserName</label>
+              <label >Email</label>
            </div>
-            <input type="text" name="" id=""/>
+            <input type="email" name="email" onChange={(e)=> updateForm(e)}/>
         </div>
         <div>
            <div>
-              <label for="">Password</label>
+              <label >Password</label>
            </div>
-            <input type="password" name="" id=""/>
+            <input type="password" name="password" onChange={(e)=> updateForm(e)}/>
         </div>
         <div className="flex">
-            <input type="checkbox" name="" id=""/>
-            <label for="">Remembre Me</label>
+            <input type="checkbox" name="" />
+            <label >Remembre Me</label>
         </div>
         <div>
           <Link to={"/register"}>
@@ -28,7 +42,7 @@ function Login() {
           <span>Dont have a Account Register Now</span>
           </Link>
       </div>
-        <button className="btn"> Login</button>
+        <button className="btn" onClick={() => login(dispatch,user)}> Login</button>
     </div>
 </div>
   )

@@ -1,34 +1,45 @@
 import React from 'react'
 import {Link } from "react-router-dom";
-
+import { register } from '../store/userApi';
+import { useDispatch } from 'react-redux';
 function Register() {
+   const dispatch = useDispatch();
+   const updateForm = (e) => {
+     setUser(
+       {
+         ...user,
+         [e.target.name]: e.target.value
+       }
+     )
+   }
+   const [user, setUser] = React.useState({});
   return (
     <div className="login-con reg">
     <div>
         <h1>Register</h1>
         <div>
            <div>
-              <label for="">UserName</label>
+              <label >UserName</label>
            </div>
-            <input type="text" name="name" id=""/>
+            <input type="text" name="username" onChange={(e)=> updateForm(e)}/>
         </div>
         <div>
            <div>
-              <label for="">Email</label>
+              <label >Email</label>
            </div>
-            <input type="text" name="email" id=""/>
+            <input type="email" name="email" onChange={(e)=> updateForm(e)}/>
         </div>
         <div>
            <div>
-              <label for="">Password</label>
+              <label >Password</label>
            </div>
-            <input type="password" name="pwd" id=""/>
+            <input type="password" name="password" onChange={(e)=> updateForm(e)}/>
         </div>
         <div>
            <div>
-              <label for="">Confirm Password</label>
+              <label >Confirm Password</label>
            </div>
-            <input type="password" name="cpwd" id=""/>
+            <input type="password" name="cpassword" onChange={(e)=> updateForm(e)}/>
         </div>
         <div>
            <Link to={"/login"}>
@@ -36,7 +47,7 @@ function Register() {
             <span>Already have one? Login</span>
            </Link>
         </div>
-        <button className="btn">Register</button>
+        <button className="btn" onClick={() => register(dispatch,user)}>Register</button>
     </div>
 </div>
   )
