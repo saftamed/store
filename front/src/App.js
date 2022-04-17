@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.css";
+import Profile from "./pages/Profile";
 // import "../node_modules/react-animate-on-scroll/dist/scrollAnimation.min.css";
 // // import "animate.css/animate.min.css";
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={user===null?<Login />:<Navigate replace  to="/"/>} />
       <Route path="/register" element={user===null?<Register />:<Navigate replace  to="/"/>} />
+      <Route path="/profile" element={user!==null?<Profile />:<Navigate replace  to="/login"/>} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/produit/:id" element={<ProduitDet />} />
       <Route path="/produits/:cat" element={<CategorieProduit />} />

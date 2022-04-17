@@ -16,8 +16,10 @@ const checkLogin = (req, res, next) => {
 };
 
 const checkLoginAuthorization = (req, res, next) => {
+  console.log("checkLoginAuthorization");
     checkLogin(req, res, () => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
+      console.log("checkLogin");
       next();
     } else {
       res.status(403).json("You are not alowed to do that!");

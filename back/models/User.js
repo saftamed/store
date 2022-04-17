@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    username: { type: String, required: true, unique: true },
+    username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: {
@@ -10,6 +10,13 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
     img: { type: String },
+    address: [
+      {
+        street: { type: String },
+        city: { type: String },
+        zip: { type: String },
+      },
+    ],
   },
   { timestamps: true }
 );

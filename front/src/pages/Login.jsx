@@ -2,6 +2,7 @@ import React from 'react'
 import {Link } from "react-router-dom";
 import { login } from '../store/userApi';
 import { useDispatch } from 'react-redux';
+import Loading from '../components/Loading';
 function Login() {
   const dispatch = useDispatch();
   const updateForm = (e) => {
@@ -17,6 +18,8 @@ function Login() {
     password: ''
   });
   return (
+    <>
+      <Loading/>
     <div className="login-con">
     <div>
         <h1>Login</h1>
@@ -45,6 +48,7 @@ function Login() {
         <button className="btn" onClick={() => login(dispatch,user)}> Login</button>
     </div>
 </div>
+</>
   )
 }
 

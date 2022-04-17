@@ -17,7 +17,7 @@ body {
   /* margin: 0px 25px; */
   position: sticky;
   top: 0;
-  z-index: 10000;
+  z-index: 100;
   background: white;
 }
 .nav-bar .container {
@@ -58,6 +58,7 @@ body {
   display: flex;
   gap: 10px;
   justify-content: end;
+  align-items: center;
 }
 .nav-bar .right .cart {
   position: relative;
@@ -85,6 +86,8 @@ body {
   font-size: 20px;
   padding: 10px;
   text-decoration: none;
+  text-transform: capitalize;
+    font-weight: 700;
 }
 
 .slider {
@@ -813,4 +816,154 @@ a{
 .produit-con{
   text-align: center
   ;
+}
+
+.loading{
+  position: absolute;
+    width: 100vw;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2e2e2ea1;
+    color: white;
+}
+.loader {
+  margin-bottom: 30px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #bd6901;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s cubic-bezier(0.13, 0.33, 0.65, 0.76) infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.showLogout{
+  position: relative;
+  cursor: pointer;
+}
+.logout{
+  display: none;
+  position: absolute;
+  top: 34px;
+  right: -54px;
+  background-color: #ffffff;
+
+  border-radius: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.showLogout:hover .logout{
+  display: block;
+  padding: 10px;
+}
+.logout .login-link{
+  font-size: 15px;
+}
+.login-link:hover{
+  color: #bd6901;
+
+}
+
+.account-info{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  background: none;
+  height: auto;
+}
+.account-info >div{
+  margin: 0px;
+  border: none;
+  box-shadow: none;
+}
+
+.account-info h1{
+  text-align: left;
+}
+
+
+
+
+/* The Modal */
+.bg{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 10;
+  background: #00000061;
+}
+.modal {
+
+  position: fixed;
+  z-index: 999;
+  top: 0;
+
+}
+.ccc{
+  display: flex;
+  width: 100vw;
+  margin: auto;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100vh;
+}
+
+.adr > div{
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  z-index: 99;
+  width: 30%;
+  border-radius: 10px;
+  padding: 49px;
+  position: relative;
+}
+.adr input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  border: 1px solid;
+  margin: 9px 0;
+}
+.adr label {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+.close {
+  color: #aaaaaa;
+  position: absolute;
+  font-size: 35px;
+  right: 15px;
+  top: 6px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }

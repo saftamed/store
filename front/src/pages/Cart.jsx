@@ -13,7 +13,7 @@ function Cart() {
           <div className="content">
               <div className="items">
                   {
-                        cart.products.map(item => <CartProduit key={item._id} item={item}/>)
+                        cart.products.map(item => <CartProduit key={item._id+item.iid} item={item}/>)
                   }
               </div>
               <div className="checkout">

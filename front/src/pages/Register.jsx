@@ -2,6 +2,7 @@ import React from 'react'
 import {Link } from "react-router-dom";
 import { register } from '../store/userApi';
 import { useDispatch } from 'react-redux';
+import Loading from '../components/Loading';
 function Register() {
    const dispatch = useDispatch();
    const updateForm = (e) => {
@@ -14,6 +15,8 @@ function Register() {
    }
    const [user, setUser] = React.useState({});
   return (
+     <>
+     <Loading/>
     <div className="login-con reg">
     <div>
         <h1>Register</h1>
@@ -50,6 +53,7 @@ function Register() {
         <button className="btn" onClick={() => register(dispatch,user)}>Register</button>
     </div>
 </div>
+</>
   )
 }
 

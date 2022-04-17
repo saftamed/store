@@ -4,6 +4,7 @@ const User = require("./models/User");
 const Product = require("./models/Product");
 const bodyParser = require('body-parser')
 const productRoute = require("./routes/product");
+const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 var cors = require('cors')
 
@@ -34,7 +35,7 @@ app.use(bodyParser.json())
 
 app.use("/api/v1/product",productRoute)
 
-app.use("/api/v1/user",productRoute)
+app.use("/api/v1/user",userRoute)
 
 app.use("/api/v1/auth",authRoute)
 

@@ -1,14 +1,17 @@
 const User = require("../models/User");
+const { checkLoginAuthorization } = require("./userMidelWare");
+const CryptoJS = require("crypto-js");
 
 
 const router = require("express").Router();
 
 //UPDATE
-router.put("/:id", async (req, res) => {
+router.put("/:id",checkLoginAuthorization, async (req, res) => {
+  console.log(req.body);
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
-      process.env.PASS_SEC
+      process.env.PASS_SEC_KEY
     ).toString();
   }
 
@@ -20,6 +23,20 @@ router.put("/:id", async (req, res) => {
       },
       { new: true }
     );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// add address
+router.put("/address/:id",checkLoginAuthorization, async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const updatedUser = await User.findById(req.params.id);
+    updatedUser.address.push(req.body.adr);
+    await updatedUser.save();
     res.status(200).json(updatedUser);
   } catch (err) {
     res.status(500).json(err);
