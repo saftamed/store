@@ -19,7 +19,7 @@ function Notification() {
       className="visible"
       style={{
         transform: notif.show ? "translateX(-340px)" : "",
-        backgroundColor: notif.type === "success" ? "#4bb543" : "##fb3c3c",
+        backgroundColor: notif.type === "success" ? "#4bb543" : "#fb3c3c",
       }}
     >
       {notif.message}

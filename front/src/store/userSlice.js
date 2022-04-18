@@ -19,16 +19,36 @@ const userSlice = createSlice({
     loginSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
+      state.notification = {
+        message: action.payload.msg,
+        show: true,
+        type: "success",
+      };
     },
     reqSuccess: (state) => {
       state.isFetching = false;
+      state.notification = {
+        message: "Subscribed Successfully",
+        show: true,
+        type: "success",
+      };
     },
     loginFailure: (state) => {
       state.isFetching = false;
       state.error = true;
+      state.notification = {
+        message: "Login failed",
+        show: true,
+        type: "error",
+      };
     },
     logout: (state) => {
       state.currentUser = null;
+      state.notification = {
+        message: "Logged out",
+        show: true,
+        type: "success",
+      };
     },setNotification: (state, action) => {
       state.notification = action.payload;
     },

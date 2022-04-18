@@ -37,7 +37,10 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("Wrong credentials!");
+    if(!user) {
+      return res.status(401).json({ msg: "Invalid email or password" });
+    }
+
 
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,

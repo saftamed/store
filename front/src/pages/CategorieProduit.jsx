@@ -15,9 +15,13 @@ function CategorieProduit() {
   const filterFunction = (item) => {
     if (filters.color) {
       if (filters.size) {
+        let a = item.colors.find((c) => c.name === filters.color);
+        if(a === undefined || a.sizes === undefined){
+          return false;
+        }
         return (
           item.colors.map((i) => i.name).includes(filters.color) &&
-          item.colors.find((c) => c.name === filters.color)?.sizes[
+          a.sizes[
             filters.size
           ] > 0
         );

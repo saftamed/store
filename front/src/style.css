@@ -808,6 +808,7 @@ body::-webkit-scrollbar-thumb {
     height: 100% !important;
     width: 90% !important;
     margin: auto !important;
+    padding: 0 !important;
   }
   .login-con > div > div {
     width: 100%;
@@ -815,6 +816,9 @@ body::-webkit-scrollbar-thumb {
   .search-items {
     width: 100vw !important;
     box-sizing: border-box;
+  }
+  .all .flex > div{
+    max-width: 90%;
   }
 }
 
@@ -1051,5 +1055,103 @@ a {
     top: 100px;
     right: -310px;
     transition: all 1.5s ease;
+    z-index: 9999;
   }
-  
+  .comment{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .comment .details{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 30px ;
+    box-sizing: border-box;
+  }
+
+  .comment .details .summary > div{
+display: flex;
+justify-content: space-between;
+align-items: center;
+  }
+  .comment .details .summary > div button{
+width: 200px;
+margin: 0;
+  }
+
+  .addForm form label{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .addForm form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    gap: 10px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+    background: white;
+    margin-top: 20px;
+
+  }
+
+  .addForm{
+    transition:height 1.5s;
+    overflow: hidden;
+  }
+  textarea.form-control {
+    font-size: 18px;
+    color: black;
+}
+
+
+.avatar{
+  width: 60px;
+  height: 60px;
+  background: #726363;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.name > * {
+  margin: 0;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.comment-item-header{
+  display: flex;
+  gap: 20px;
+}
+.name :first-child{
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.comment-item-body p {
+  font-size: 17px;
+  margin: 5px 0px;
+}
+
+.comment-item {
+  border: 1px solid;
+  margin-bottom: 5px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.comment .body {
+  margin-top: 15px;
+}

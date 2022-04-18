@@ -31,6 +31,7 @@ mongoose
     console.error("Database connection error");
   });
 
+  
   // parse application/x-www-form-urlencoded
 app.use(bodyParser.json())
 
@@ -41,6 +42,7 @@ app.use("/api/v1/user",userRoute)
 app.use("/api/v1/auth",authRoute)
 
 app.use("/api/v1/news",newsRoute)
+app.use("/api/v1/comments",require("./routes/comment"))
 
 
 app.listen(process.env.PORT || 3000, function () {

@@ -1,0 +1,41 @@
+const router = require("express").Router();
+const Comment = require('../models/comment');
+const { checkLogin } = require("./userMidelWare");
+
+router.post("/", checkLogin, async (req, res) => {
+  console.log({...req.body, userId: req.user.id});
+  const comment = new Comment({...req.body, userId: req.user.id});
+  try {
+    const savedComment = await comment.save();
+    res.status(200).json(savedComment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.put("/:id", async (req, res) => {
+    try {
+      const comment = await Comment.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        });
+
+    res.status(200).json(comment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+    try {
+      await Comment.findByIdAndDelete(req.params.id);
+      res.status(200).json("Comment has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+
+
+
+module.exports = router;

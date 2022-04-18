@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import ProduitList from "../components/ProduitList";
 import ScrollAnimation from "react-animate-on-scroll";
+import ReactStars from "react-rating-stars-component";
+
 import axios from "axios";
 import { useParams } from "react-router";
 import { addProduct } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 import { setNotification } from "../store/userSlice";
+import AddComment from "../components/AddComment";
+import Footer from "../components/Footer";
 function ProduitDet() {
   const [product, setProduct] = useState(null);
   const [color, setColor] = useState(0);
@@ -43,6 +47,13 @@ const addToCart = () => {
           </div>
           <div className="info">
             <h1>{product.title}</h1>
+            <ReactStars
+    count={5}
+    size={24}
+    edit={false}
+    value={4}
+    activeColor="#ffd700"
+  />,
             {
               product.colors.length>0 && (
 
@@ -127,6 +138,9 @@ const addToCart = () => {
           </div>
         </div>
       )}
+      <AddComment   productId={product && product._id} />
+
+      <Footer />
 
       {/* <ScrollAnimation animateIn="fadeIn">
 

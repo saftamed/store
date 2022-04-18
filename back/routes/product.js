@@ -1,4 +1,5 @@
 
+const comment = require("../models/comment");
 const Product = require("../models/Product");
 //product router
 const productRouter = require("express").Router();
@@ -18,8 +19,9 @@ productRouter.get("/search/:key", async (req, res) => {
 //GET PRODUCT
 productRouter.get("/find/:id", async (req, res) => {
     try {
-      const product = await Product.findById(req.params.id);
-      res.status(200).json(product);
+      const product = await Product.findById(req.params.id);                                                
+      const comments = await comment.find({productId:req.params.id}).limit(10);                                                
+      res.status(200).json({...product._doc,comments});
     } catch (err) {
       res.status(500).json(err);
     }
