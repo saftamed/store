@@ -10,11 +10,14 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./style.css";
 import Profile from "./pages/Profile";
+import Notification from "./components/Notification";
 // import "../node_modules/react-animate-on-scroll/dist/scrollAnimation.min.css";
 // // import "animate.css/animate.min.css";
 function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
+    <>
+    <Notification />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={user===null?<Login />:<Navigate replace  to="/"/>} />
@@ -24,6 +27,7 @@ function App() {
       <Route path="/produit/:id" element={<ProduitDet />} />
       <Route path="/produits/:cat" element={<CategorieProduit />} />
     </Routes>
+    </>
   );
 }
 

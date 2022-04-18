@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess } from "./userSlice";
+import { loginFailure, loginStart, loginSuccess,reqSuccess } from "./userSlice";
 import axios from "axios";
 
 export const login = async (dispatch, user) => {
@@ -42,6 +42,16 @@ export const addAddress = async (dispatch, info) => {
   try {
     const res = await axios.put(`http://localhost:4000/api/v1/user/address/${info.theuser._id}`, {adr:info.adr});
     dispatch(loginSuccess({...res.data, accessToken: info.theuser.accessToken}));
+  } catch (err) {
+    dispatch(loginFailure());
+  }
+};
+
+export const subscribe = async (dispatch, email) => {
+  dispatch(loginStart());
+  try {
+    const res = await axios.post(`http://localhost:4000/api/v1/news`, {email});
+    dispatch(reqSuccess());
   } catch (err) {
     dispatch(loginFailure());
   }

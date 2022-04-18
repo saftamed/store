@@ -6,6 +6,7 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { addProduct } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
+import { setNotification } from "../store/userSlice";
 function ProduitDet() {
   const [product, setProduct] = useState(null);
   const [color, setColor] = useState(0);
@@ -19,7 +20,7 @@ function ProduitDet() {
         console.log(response.data);
         setProduct(response.data);
       });
-  }, []);
+  }, [id]);
 const addToCart = () => {
   dispatch(addProduct({
 ...product,
@@ -27,6 +28,7 @@ const addToCart = () => {
     size: size,
     quantity:1,
     }));
+    dispatch(setNotification({ show: true, message: "Produit ajouté au panier",type:"success" }));
 };
   return (
     <>

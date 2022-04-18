@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const productRoute = require("./routes/product");
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
+const newsRoute = require("./routes/newsLetter");
 var cors = require('cors')
 
 
@@ -38,6 +39,8 @@ app.use("/api/v1/product",productRoute)
 app.use("/api/v1/user",userRoute)
 
 app.use("/api/v1/auth",authRoute)
+
+app.use("/api/v1/news",newsRoute)
 
 
 app.listen(process.env.PORT || 3000, function () {

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 
 function Slider() {
     const [slide, setSlide] = useState(1);
@@ -9,6 +9,12 @@ function Slider() {
             setSlide(slide<1?2:slide-1);
         }
     }
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setSlide(slide>1?0:slide+1);
+      }, 5000 ) // in milliseconds
+      return () => clearInterval(intervalId)
+    }, [slide])
   return (
     <div className="slider hide">
       <div className="arrow" onClick={()=>next(false)}>

@@ -6,6 +6,15 @@ const productRouter = require("express").Router();
 
 
 
+//search a PRODUCT
+productRouter.get("/search/:key", async (req, res) => {
+    try {
+      const products = await Product.find({ title: { $regex:new RegExp(req.params.key, "i") } }).limit(10);
+      res.status(200).json(products);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 //GET PRODUCT
 productRouter.get("/find/:id", async (req, res) => {
     try {

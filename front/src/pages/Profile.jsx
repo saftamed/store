@@ -29,13 +29,13 @@ function Profile() {
       />
       <div className="account">
         <div className="container">
-          <div className="flex">
+          <div>
             <div>
-              <span>LOG OUT</span>
+              <div className="account-head">
               <h1>MY ACCOUNT</h1>
               <p>Welcome Back,Safta!</p>
-
-              <div className="account-info login-con flex">
+              </div>
+              <div className="account-info login-con flex flex-d-c">
                 <div>
                   <h3>Information</h3>
                   <div>
@@ -90,6 +90,8 @@ function Profile() {
                   </button>
                 </div>
                 <div>
+                  <div>
+
                   <h3>PRIMARY ADDRESS</h3>
                   {theuser.address.map((adr, index) => {
                     return (
@@ -100,6 +102,7 @@ function Profile() {
                       )
                     );
                   })}
+                  </div>
 
                   <button className="btn" onClick={() => setShow(true)}>
                     Add Address
