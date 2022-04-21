@@ -20,7 +20,7 @@ productRouter.get("/search/:key", async (req, res) => {
 productRouter.get("/find/:id", async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);                                                
-      const comments = await comment.find({productId:req.params.id}).limit(10);                                                
+      const comments = await comment.find({productId:req.params.id}).populate("userId",'username').limit(10);                                                
       res.status(200).json({...product._doc,comments});
     } catch (err) {
       res.status(500).json(err);

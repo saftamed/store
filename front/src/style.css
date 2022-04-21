@@ -285,6 +285,7 @@ body {
   background-color: #fff9f0;
   padding: 20px 0px;
   padding-bottom: 0;
+  margin-top: 40px;
 }
 .footer .container {
   width: 80%;
@@ -591,6 +592,7 @@ details p {
   gap: 50px;
   width: 85%;
   margin: auto;
+  align-items: flex-start;
 }
 .cart .items {
   flex: 6;
@@ -1154,4 +1156,9 @@ margin: 0;
 
 .comment .body {
   margin-top: 15px;
+}
+.comment h2 p{
+  font-size: 17px;
+  margin-top: 5px;
+  color: #7c7c7c;
 }

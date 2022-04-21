@@ -2,25 +2,32 @@ import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch } from "react-redux";
 import { addComment } from "../store/userApi";
+import OneComment from "./OneComment";
 
-function AddComment({productId}) {
-    const [rating, setRating] = React.useState(0);
+function AddComment({product}) {
+    const [rating, setRating] = React.useState(5);
     const [comment, setComment] = React.useState("");
     const [show, setShow] = React.useState(false);
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addComment(dispatch,{rating,comment,productId});
+        addComment(dispatch,{rating,comment,productId:product._id});
+        setShow(!show)
         setComment("");
-        setRating(0);
+        setRating(5);
     }
   return (
     <div className="comment">
       <div className="details">
         <div className="summary">
             <div>
-                <h2>Customer Reviews</h2>
+                <h2>Customer Reviews
+                {(product?.comments?.length ===0) &&
+                <p>no comments yet</p>
+  
+           }
+                </h2>
                 <button className="btn" onClick={(e) => setShow(!show)} > Add a comment</button>
             </div>
         </div>
@@ -33,7 +40,7 @@ function AddComment({productId}) {
                         size={32}
                         edit={true}
                         onChange={(value) => setRating(value)}
-                        value={4}
+                        value={5}
                         activeColor="#ffd700"
                     />
                     <input type="submit" className="btn"  value="Save" />
@@ -41,56 +48,12 @@ function AddComment({productId}) {
 
         </div>
         <div className="body">
-            <div className="comment-item">
-                <div className="comment-item-header">
-                    <div className="avatar">
-                      A
-                    </div>
-                    <div className="name">
-                      <p>John Doe</p>
-                      <p>12/12/2020</p>
-                      <ReactStars
-                        count={5}
-                        size={24}
-                        edit={false}
-                        value={4}
-                        activeColor="#ffd700"
-                    />
-                    </div>
-                </div>
-                <div className="comment-item-body">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris eget nisl id libero consectetur fermentum.
-                    </p>
-                </div>
-                                
-            </div>
-            <div className="comment-item">
-                <div className="comment-item-header">
-                    <div className="avatar">
-                      A
-                    </div>
-                    <div className="name">
-                      <p>John Doe</p>
-                      <p>12/12/2020</p>
-                      <ReactStars
-                        count={5}
-                        size={24}
-                        edit={false}
-                        value={4}
-                        activeColor="#ffd700"
-                    />
-                    </div>
-                </div>
-                <div className="comment-item-body">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Mauris eget nisl id libero consectetur fermentum.
-                    </p>
-                </div>
-                                
-            </div>
+           {product &&
+                product.comments.map((c)=>(
+                  <OneComment key={c._id} com={c}    />
+                ))
+           }
+
         </div>
 
       </div>

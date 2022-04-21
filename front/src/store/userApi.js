@@ -62,7 +62,7 @@ export const addComment = async (dispatch, cmnt) => {
   try {
     axios.defaults.headers.common['token'] = `Bearer ${ store.getState().user.currentUser.accessToken }`;
     const res = await axios.post(`http://localhost:4000/api/v1/comments`, cmnt);
-    dispatch(reqSuccess());
+    dispatch(reqSuccess("Comment added !"));
   } catch (err) {
     dispatch(loginFailure());
   }

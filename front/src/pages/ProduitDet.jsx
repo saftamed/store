@@ -138,7 +138,7 @@ const addToCart = () => {
           </div>
         </div>
       )}
-      <AddComment   productId={product && product._id} />
+      <AddComment   product={product} />
 
       <Footer />
 

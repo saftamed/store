@@ -10,10 +10,11 @@ const userSlice = createSlice({
       show: false,
       type: null
     },
+    products: [],
     error: false,
   },
   reducers: {
-    loginStart: (state) => {
+    startReq: (state) => {
       state.isFetching = true;
     },
     loginSuccess: (state, action) => {
@@ -33,11 +34,15 @@ const userSlice = createSlice({
         type: "success",
       };
     },
-    loginFailure: (state) => {
+    reqProSuccess: (state,action) => {
+      state.isFetching = false;
+      state.products = action.payload;
+    },
+    reqFailure: (state,action) => {
       state.isFetching = false;
       state.error = true;
       state.notification = {
-        message: "Login failed",
+        message: action.payload?action.payload :"Login failed",
         show: true,
         type: "error",
       };
@@ -55,5 +60,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure,logout,reqSuccess,setNotification} = userSlice.actions;
+export const { startReq, loginSuccess, reqSuccess,logout,reqProSuccess,setNotification,reqFailure} = userSlice.actions;
 export default userSlice.reducer;
