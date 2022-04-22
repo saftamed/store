@@ -1,14 +1,18 @@
-import React from 'react'
+import React from "react";
 import { useSelector } from "react-redux";
-
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Loading() {
-    const fetching = useSelector((state) => state.user.isFetching);
-  return fetching && (
-    <div className='loading'>
-        <h1><div class="loader"></div> Loading...</h1>
-    </div>
-  )
+  const fetching = useSelector((state) => state.isFetching);
+  return (
+    <Backdrop
+      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={fetching}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
+  );
 }
 
-export default Loading
+export default Loading;

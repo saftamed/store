@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
+import Loading from "./components/Loading";
 
 // import "../node_modules/react-animate-on-scroll/dist/scrollAnimation.min.css";
 // // import "animate.css/animate.min.css";
@@ -17,7 +18,8 @@ function App() {
   const user = useSelector((state) => state.currentUser);
   return (
     <>
-      {/* <Notification /> */}
+      <Notification />
+      <Loading />
       <Routes>
         <Route path="/"  element={<Layout />} >
           <Route path="/" element={<Home />} />

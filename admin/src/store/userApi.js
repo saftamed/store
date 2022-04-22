@@ -14,6 +14,16 @@ export const getProducts = async (dispatch) => {
   }
 };
 
+export const updateProduct = async (dispatch,product) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.put(`http://localhost:4000/api/v1/product/${product._id}`,product);
+    dispatch(reqSuccess("Product updated"));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot update data"));
+  }
+};
+
 
 
 

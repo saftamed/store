@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setNotification } from "../store/userSlice";
-
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 function Notification() {
-  const notif = useSelector((state) => state.user.notification);
+  const notif = useSelector((state) => state.notification);
   const dispatch = useDispatch();
   useEffect(() => {
     if (notif.show) {
@@ -18,11 +19,13 @@ function Notification() {
       id="notif"
       className="visible"
       style={{
-        transform: notif.show ? "translateX(-340px)" : "",
-        backgroundColor: notif.type === "success" ? "#4bb543" : "#fb3c3c",
+        transform: notif.show? "translateX(-340px)":""
       }}
     >
-      {notif.message}
+      <Alert severity={notif.type}>
+        <AlertTitle>{notif.type}</AlertTitle>
+        {notif.message}
+      </Alert>
     </div>
   );
 }

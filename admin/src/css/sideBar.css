@@ -14,7 +14,7 @@
   }
   .container .content{
     height: calc(100vh - 50px);
-    overflow-y: scroll;
+    overflow-y: hidden;
     flex: 4;
     /* max-width: 230px; */
   }
