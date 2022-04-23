@@ -12,6 +12,16 @@ function Product() {
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const [setting, setSetting] = useState({ option: 0,color:0 });
+  const [image, setImage] = useState({ preview: '', data: '' });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData()
+    formData.append('file', image.data)
+    formData.append('product', JSON.stringify(product))
+    updateProduct(dispatch, { formData, id });
+    
+  }
 
   const setTextHan = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -22,7 +32,13 @@ function Product() {
     setProduct(c);
 
   };
-
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    }
+    setImage(img)
+  }
   const addNewColor = () => {
     let c = {...product};
     c.colors.push({name:"New Color",sizes:{xl:0,l:0,m:0,s:0,xxl:0}});
@@ -85,6 +101,7 @@ function Product() {
           console.log("2");
         }
         setProduct(response.data);
+        setImage({preview:`http://localhost:4000/public/${response.data.img}`,data:""});
       });
   }, [id]);
 
@@ -98,21 +115,20 @@ function Product() {
             "& .MuiTextField-root": { m: 1 },
           }}
           autoComplete="off"
-          onSubmit={(e) => {
-            e.preventDefault();
-            updateProduct(dispatch, product);
-          }}
+          onSubmit={(e) => handleSubmit(e)}
         >
           <div className="product-info">
             <div>
-              <img src={product.img} />
+              <img src={image.preview} />
               <div className="file-input">
                 <input
                   type="file"
-                  name="file-input"
+                  name="file"
                   id="file-input"
                   className="file-input__input"
+                  onChange={handleFileChange}
                 />
+
                 <label className="file-input__label" htmlFor="file-input">
                   <span>Upload file</span>
                   <svg

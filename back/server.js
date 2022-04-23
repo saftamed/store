@@ -17,7 +17,7 @@ const express = require("express");
 const app = express();
 app.use(cors())
 
-
+app.use('/public', express.static('public'));
 // Connect To DataBase
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -33,7 +33,10 @@ mongoose
 
   
   // parse application/x-www-form-urlencoded
-app.use(bodyParser.json())
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+      extended: false
+  }));
 
 app.use("/api/v1/product",productRoute)
 

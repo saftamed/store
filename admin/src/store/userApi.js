@@ -5,6 +5,7 @@ import {store} from "./store";
 
 
 export const getProducts = async (dispatch) => {
+
   dispatch(startReq());
   try {
     const res = await axios.get("http://localhost:4000/api/v1/product");
@@ -14,10 +15,11 @@ export const getProducts = async (dispatch) => {
   }
 };
 
-export const updateProduct = async (dispatch,product) => {
+export const updateProduct = async (dispatch,data) => {
+  console.log(data);
   dispatch(startReq());
   try {
-    const res = await axios.put(`http://localhost:4000/api/v1/product/${product._id}`,product);
+    const res = await axios.put(`http://localhost:4000/api/v1/product/${data.id}`,data.formData);
     dispatch(reqSuccess("Product updated"));
   } catch (err) {
     dispatch(reqFailure("Error cannot update data"));

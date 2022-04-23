@@ -4,7 +4,35 @@ const Product = require("../models/Product");
 //product router
 const productRouter = require("express").Router();
 
+/************* M ****************/
+let     multer = require('multer'),
+ { v4: uuidv4 } = require('uuid');
 
+const DIR = './public/';
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, uuidv4() + '-' + fileName)
+    }
+});
+var upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        }
+    }
+});
+
+
+
+/*****************************/
 
 
 //search a PRODUCT
@@ -72,12 +100,14 @@ productRouter.get("/", async (req, res) => {
   });
   
   //UPDATE
-  productRouter.put("/:id", async (req, res) => {
+  productRouter.put("/:id",upload.single('file'), async (req, res) => {
+    var p = JSON.parse(req.body.product)
+    console.log(p);
     try {
       const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
         {
-          $set: req.body,
+          $set: {...p,img:req.file? req.file.filename:p.img},
         },
         { new: true }
       );
