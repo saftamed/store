@@ -1,4 +1,4 @@
-import { reqProSuccess, reqSuccess, reqFailure,startReq } from "./userSlice";
+import { reqProSuccess, reqSuccess,reqUsersSuccess, reqFailure,startReq,loginSuccess } from "./userSlice";
 import axios from "axios";
 import {store} from "./store";
 
@@ -14,6 +14,16 @@ export const getProducts = async (dispatch) => {
     dispatch(reqFailure("Error cannot get data"));
   }
 };
+export const getUsers = async (dispatch) => {
+
+  dispatch(startReq());
+  try {
+    const res = await axios.get("http://localhost:4000/api/v1/user");
+    dispatch(reqUsersSuccess(res.data));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot get data"));
+  }
+};
 
 export const updateProduct = async (dispatch,data) => {
   console.log(data);
@@ -25,20 +35,51 @@ export const updateProduct = async (dispatch,data) => {
     dispatch(reqFailure("Error cannot update data"));
   }
 };
+export const addProduct = async (dispatch,formData) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.post(`http://localhost:4000/api/v1/product`,formData);
+    dispatch(reqSuccess("Product created"));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot create Product"));
+  }
+};
+
+
+
+export const updateUser = async (dispatch,data) => {
+  console.log(data);
+  dispatch(startReq());
+  try {
+    const res = await axios.put(`http://localhost:4000/api/v1/user/${data.id}`,data.user);
+    dispatch(reqSuccess("User updated"));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot update User"));
+  }
+};
+export const addUser = async (dispatch,data) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.post(`http://localhost:4000/api/v1/user`,data);
+    dispatch(reqSuccess("User created"));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot create User"));
+  }
+};
 
 
 
 
-// export const login = async (dispatch, user) => {
-//     console.log(user);
-//   dispatch(loginStart());
-//   try {
-//     const res = await axios.post("http://localhost:4000/api/v1/auth/login", user);
-//     dispatch(loginSuccess({...res.data,msg:"Login Successful"}));
-//   } catch (err) {
-//     dispatch(loginFailure());
-//   }
-// };
+export const login = async (dispatch, user) => {
+    console.log(user);
+  dispatch(startReq());
+  try {
+    const res = await axios.post("http://localhost:4000/api/v1/auth/login", user);
+    dispatch(loginSuccess({user:res.data,msg:"Login Successful"}));
+  } catch (err) {
+    dispatch(reqFailure("Email or password is incorrect"));
+  }
+};
 // export const register = async (dispatch, user) => {
 //     console.log(user);
 //   dispatch(loginStart());

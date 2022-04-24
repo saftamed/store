@@ -11,6 +11,9 @@ import Login from "./pages/Login";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Loading from "./components/Loading";
+import Users from "./pages/Users";
+import User from "./pages/User";
+import NewsSub from "./pages/NewsSub";
 
 // import "../node_modules/react-animate-on-scroll/dist/scrollAnimation.min.css";
 // // import "animate.css/animate.min.css";
@@ -21,12 +24,15 @@ function App() {
       <Notification />
       <Loading />
       <Routes>
-        <Route path="/"  element={<Layout />} >
+        <Route path="/" element={user!==null?<Layout />:<Navigate replace  to="/login"/>} >
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/news" element={<NewsSub />} />
+          <Route path="/user/:id" element={<User />} />
         </Route>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={user===null?<Login />:<Navigate replace  to="/"/>} />
       </Routes>
     </>
   );

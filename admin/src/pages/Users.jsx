@@ -2,36 +2,42 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@material-ui/data-grid';
 import { Link } from 'react-router-dom';
 import {Delete,Edit} from '@material-ui/icons';
-import { getProducts } from '../store/userApi';
+import { getUsers} from '../store/userApi';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const columns = [
-    { field: "_id", headerName: "ID", width: 150 },
     {
-      field: "title",
-      headerName: "Title",
-      width: 200,
+      field: "username",
+      headerName: "UserName",
+      width: 170,
     },
     {
-        field: "desc",
-        headerName: "Description",
+        field: "email",
+        headerName: "Email",
         width: 200,
     },
     
     {
-        field: "img",
-        headerName: "Image",
+        field: "isAdmin",
+        headerName: "Admin",
         width: 150,
-        renderCell: (data) => {
-            return <img src={data.row.img} alt="img" style={{ width: '100px', height: '100px' }} />
-        }
 
     },
     {
-      field: "price",
-      headerName: "Price",
+      field: "address",
+      headerName: "Address",
       width: 150,
+      renderCell: (params) => {
+        return (
+           <span> {params.row.address.length}</span>
+        );
+      },
+    },
+    {
+      field: "createdAt",
+      headerName: "Created At",
+      width: 170
     },
     {
       field: "action",
@@ -40,7 +46,7 @@ const columns = [
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row._id}>
+            <Link to={"/user/" + params.row._id}>
               <button className="e-d d" >Edit <Edit />  </button>
             </Link>
             
@@ -54,18 +60,18 @@ const columns = [
     },
   ];
 
-function Products() {
-    const products = useSelector(state => state.products)
+function Users() {
+    const users = useSelector(state => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
-        getProducts(dispatch)
+        getUsers(dispatch)
     }, [])
     
   return (
     <div style={{ height: 550, width: '100%' }} className='product'>
-        <h1>Products</h1>
+        <h1>Users</h1>
     <DataGrid
-      rows={products}
+      rows={users}
       columns={columns}
       pageSize={8}
       rowsPerPageOptions={[5,10,20]}
@@ -77,4 +83,4 @@ function Products() {
   )
 }
 
-export default Products
+export default Users

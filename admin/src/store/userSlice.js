@@ -11,6 +11,7 @@ const userSlice = createSlice({
       type: null
     },
     products: [],
+    users: [],
     error: false,
   },
   reducers: {
@@ -19,12 +20,22 @@ const userSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
-      state.currentUser = action.payload;
+      if(action.payload.user.isAdmin){
+
+      state.currentUser = action.payload.user;
       state.notification = {
         message: action.payload.msg,
         show: true,
         type: "success",
       };
+    }else{
+      state.currentUser = null;
+      state.notification = {
+        message: "User is not admin",
+        show: true,
+        type: "error",
+      };
+    }
     },
     reqSuccess: (state,action) => {
       state.isFetching = false;
@@ -37,6 +48,10 @@ const userSlice = createSlice({
     reqProSuccess: (state,action) => {
       state.isFetching = false;
       state.products = action.payload;
+    },
+    reqUsersSuccess: (state,action) => {
+      state.isFetching = false;
+      state.users = action.payload;
     },
     reqFailure: (state,action) => {
       state.isFetching = false;
@@ -63,5 +78,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { startReq, loginSuccess,setFetchingFalse, reqSuccess,logout,reqProSuccess,setNotification,reqFailure} = userSlice.actions;
+export const { startReq, loginSuccess,reqUsersSuccess,setFetchingFalse, reqSuccess,logout,reqProSuccess,setNotification,reqFailure} = userSlice.actions;
 export default userSlice.reducer;

@@ -6,20 +6,25 @@ import { TextField } from "@material-ui/core";
 import { MenuItem, Box } from "@mui/material";
 import { AddCircleOutline, Send, DeleteForever } from "@material-ui/icons";
 import {IconButton,Button} from "@mui/material";
-import { updateProduct } from "../store/userApi";
+import { updateProduct,addProduct } from "../store/userApi";
 function Product() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
-  const [setting, setSetting] = useState({ option: 0,color:0 });
+  const [setting, setSetting] = useState({ option: 1,color:0 });
   const [image, setImage] = useState({ preview: '', data: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     let formData = new FormData()
     formData.append('file', image.data)
     formData.append('product', JSON.stringify(product))
-    updateProduct(dispatch, { formData, id });
+    if(id==="add"){
+     addProduct(dispatch, formData);
+     } else{
+      updateProduct(dispatch, { formData, id });
+    }
     
   }
 
@@ -82,7 +87,18 @@ function Product() {
   };
 
   useEffect(() => {
-    axios
+    if(id ==="add"){
+      setProduct({
+        title: "New Product",
+        price: 0,
+        desc: "",
+        colors: [{name:"New Color"}],
+        categories: [],
+        img:"product.jpg"
+      });
+      setImage({preview:`http://localhost:4000/public/product.jpg`,data:""});
+    }else{
+      axios
       .get(`http://localhost:4000/api/v1/product/find/${id}`)
       .then((response) => {
         console.log(response.data);
@@ -103,6 +119,8 @@ function Product() {
         setProduct(response.data);
         setImage({preview:`http://localhost:4000/public/${response.data.img}`,data:""});
       });
+    }
+
   }, [id]);
 
   return (

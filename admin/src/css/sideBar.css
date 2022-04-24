@@ -14,7 +14,7 @@
   }
   .container .content{
     height: calc(100vh - 50px);
-    overflow-y: hidden;
+    overflow-y: auto;
     flex: 4;
     /* max-width: 230px; */
   }
@@ -47,7 +47,7 @@
   
     
   }
-  .sidebarWrapper ul li:hover ,.sidebarWrapper .active{
+  .sidebarWrapper ul li:hover ,.sidebarWrapper .active li{
     color: #000;
     text-decoration: none;
     background-color: rgb(193, 224, 235);

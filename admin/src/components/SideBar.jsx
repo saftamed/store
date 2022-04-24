@@ -1,6 +1,6 @@
 import React from 'react'
 import "../css/sideBar.css"
-import { Link } from "react-router-dom";
+import { NavLink  } from "react-router-dom";
 import {
     LineStyle,
     Timeline,
@@ -24,12 +24,12 @@ function SideBar() {
         <div className="sidebarMenu">
           <h3>Dashboard</h3>
           <ul>
-            <Link to="/">
-            <li className="active">
+            <NavLink  to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+            <li  >
               <LineStyle  />
               Home
             </li>
-            </Link>
+            </NavLink>
             <li >
               <Timeline />
               Analytics
@@ -41,54 +41,49 @@ function SideBar() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 >Quick Menu</h3>
+          <h3 >Products</h3>
           <ul >
-            <Link to="/users" >
-              <li>
-                <PermIdentity />
-                Users
-              </li>
-            </Link>
-            <Link to="/products" >
+            <NavLink  to="/products" className={({ isActive }) => (isActive ? "active" : "")}>
               <li >
                 <Storefront  />
                 Products
               </li>
-            </Link>
-            <li >
-              <AttachMoney  />
-              Transactions
-            </li>
-            <li >
-              <BarChart />
-              Reports
-            </li>
+            </NavLink>
+            <NavLink  to="/product/add" className={({ isActive }) => (isActive ? "active" : "")}>
+              <li >
+                <Storefront  />
+                Add Product
+              </li>
+            </NavLink>
+           
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 >Notifications</h3>
+          <h3 >Users</h3>
           <ul >
-            <li>
-              <MailOutline  />
-              Mail
-            </li>
-            <li>
-              <DynamicFeed  />
-              Feedback
-            </li>
-            <li >
-              <ChatBubbleOutline  />
-              Messages
-            </li>
+          <NavLink  to="/users" className={({ isActive }) => (isActive ? "active" : "")} >
+              <li >
+                <Storefront  />
+                All Users
+              </li>
+            </NavLink>
+            <NavLink  to="/user/add" className={({ isActive }) => (isActive ? "active" : "")} >
+              <li >
+                <Storefront  />
+                Add User
+              </li>
+            </NavLink>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 >Staff</h3>
+          <h3 >News Letter</h3>
           <ul>
-            <li>
-              <WorkOutline />
-              Manage
-            </li>
+          <NavLink  to="/news" className={({ isActive }) => (isActive ? "active" : "")} >
+              <li >
+                <Storefront  />
+                Show Subscribers
+              </li>
+            </NavLink>
             <li >
               <Timeline  />
               Analytics

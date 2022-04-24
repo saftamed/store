@@ -1,18 +1,20 @@
 const User = require("../models/User");
 const { checkLoginAuthorization } = require("./userMidelWare");
 const CryptoJS = require("crypto-js");
-
+const jwt = require("jsonwebtoken");
 
 const router = require("express").Router();
 
 //UPDATE
-router.put("/:id",checkLoginAuthorization, async (req, res) => {
+router.put("/:id", async (req, res) => {
   console.log(req.body);
-  if (req.body.password) {
+  if (req.body.opassword) {
+    if(req.body.npassword === req.body.cpassword) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SEC_KEY
     ).toString();
+    }
   }
 
   try {
@@ -72,6 +74,27 @@ router.get("/", async (req, res) => {
       ? await User.find().sort({ _id: -1 }).limit(5)
       : await User.find();
     res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.post("/", async (req, res) => {
+  const newUser = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.PASS_SEC_KEY
+    ).toString(),
+  });
+
+  try {
+    const savedUser = await newUser.save();
+    const { password, ...others } = savedUser._doc;
+
+    res.status(200).json(others);
   } catch (err) {
     res.status(500).json(err);
   }

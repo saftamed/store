@@ -11,6 +11,15 @@
     color: darkblue;
     font-size: 30px;
 }
-.nav-item svg{
-    margin-left: 8px;
+
+.nav-item{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    gap: 5px;
+}
+
+.nav-item span{
+    font-size: 1.2rem;
+    text-transform: capitalize;
 }

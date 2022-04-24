@@ -88,9 +88,10 @@ productRouter.get("/", async (req, res) => {
 
 
 
-  productRouter.post("/", async (req, res) => {
-    const newProduct = new Product(req.body);
-  
+  productRouter.post("/",upload.single('file'), async (req, res) => {
+    var p = JSON.parse(req.body.product)
+    p.img = req.file? req.file.filename:p.img
+    const newProduct = new Product(p);
     try {
       const savedProduct = await newProduct.save();
       res.status(200).json(savedProduct);
