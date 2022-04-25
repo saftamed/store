@@ -1,4 +1,4 @@
-import { reqProSuccess, reqSuccess,reqUsersSuccess, reqFailure,startReq,loginSuccess } from "./userSlice";
+import { reqProSuccess,userDelSuccess, reqSuccess,proDelSuccess,reqUsersSuccess, reqFailure,startReq,loginSuccess } from "./userSlice";
 import axios from "axios";
 import {store} from "./store";
 
@@ -35,6 +35,45 @@ export const updateProduct = async (dispatch,data) => {
     dispatch(reqFailure("Error cannot update data"));
   }
 };
+
+
+export const cmntVerif = async (dispatch,id) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.put(`http://localhost:4000/api/v1/comments/verify/${id}`);
+    dispatch(reqSuccess("Comment verified"));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot verify comment"));
+  }
+};
+export const cmntDelete = async (dispatch,id) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.delete(`http://localhost:4000/api/v1/comments/${id}`);
+    dispatch(reqSuccess("Comment deleted"));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot delete comment"));
+  }
+};
+export const proDelete = async (dispatch,id) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.delete(`http://localhost:4000/api/v1/product/${id}`);
+    dispatch(proDelSuccess(id));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot delete product"));
+  }
+};
+export const deleteUser = async (dispatch,id) => {
+  dispatch(startReq());
+  try {
+    const res = await axios.delete(`http://localhost:4000/api/v1/user/${id}`);
+    dispatch(userDelSuccess(id));
+  } catch (err) {
+    dispatch(reqFailure("Error cannot delete User"));
+  }
+};
+
 export const addProduct = async (dispatch,formData) => {
   dispatch(startReq());
   try {

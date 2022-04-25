@@ -14,6 +14,24 @@ router.post("/", checkLogin, async (req, res) => {
 });
 
 
+router.get("/", async (req, res) => {
+    try {
+      const comments = await Comment.find().populate('userId','email').populate('productId','title').limit(10);
+
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+router.put("/verify/:id", async (req, res) => {
+    try {
+      const comment = await Comment.findByIdAndUpdate(req.params.id, {verified: true});
+
+    res.status(200).json(comment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 router.put("/:id", async (req, res) => {
     try {
       const comment = await Comment.findByIdAndUpdate(req.params.id, req.body, {

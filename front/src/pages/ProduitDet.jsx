@@ -41,7 +41,7 @@ const addToCart = () => {
         <div className="pcontainer flex-d-c">
           <div className="img">
             <img
-              src={product.img}
+              src={"http://localhost:4000/public/"+product.img}
               alt=""
             />
           </div>

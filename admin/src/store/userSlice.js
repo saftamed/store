@@ -5,6 +5,7 @@ const userSlice = createSlice({
   initialState: {
     currentUser: null,
     isFetching: false,
+    sliderShow:true,
     notification:{
       message: null,
       show: false,
@@ -15,6 +16,9 @@ const userSlice = createSlice({
     error: false,
   },
   reducers: {
+    toggleSlider: (state) => {
+      state.sliderShow = !state.sliderShow;
+    },
     startReq: (state) => {
       state.isFetching = true;
     },
@@ -74,9 +78,27 @@ const userSlice = createSlice({
     },
     setFetchingFalse: (state) => {
       state.isFetching = false;
+    },
+    proDelSuccess:(state,action)=>{
+      state.products = state.products.filter(product=>product._id !== action.payload);
+      state.isFetching = false;
+      state.notification = {
+        message: "product deleted",
+        show: true,
+        type: "success",
+      };
+    },
+    userDelSuccess:(state,action)=>{
+      state.users = state.users.filter(user=>user._id !== action.payload);
+      state.isFetching = false;
+      state.notification = {
+        message: "user deleted",
+        show: true,
+        type: "success",
+      };
     }
   },
 });
 
-export const { startReq, loginSuccess,reqUsersSuccess,setFetchingFalse, reqSuccess,logout,reqProSuccess,setNotification,reqFailure} = userSlice.actions;
+export const { startReq, toggleSlider,loginSuccess,userDelSuccess,proDelSuccess,reqUsersSuccess,setFetchingFalse, reqSuccess,logout,reqProSuccess,setNotification,reqFailure} = userSlice.actions;
 export default userSlice.reducer;

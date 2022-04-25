@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid,GridToolbar } from "@material-ui/data-grid";
 import { Delete, Edit } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -30,17 +30,30 @@ function NewsSub() {
       setSubs(response.data);
     });
   }, []);
+  const [rowHeight, setRowHeight] = useState(40);    
+
+  useEffect(() => {
+           if (rowHeight === 40) {
+             setRowHeight(42);
+           }else {
+            setRowHeight(40);
+           }
+        }, [subs]);
   return (
     <div style={{ height: 550, width: "100%" }} className="product">
       <h1>Subscribers To The News Letter</h1>
       <DataGrid
         rows={subs}
         columns={columns}
-        pageSize={8}
+        rowHeight={rowHeight}
+        pageSize={10}
         rowsPerPageOptions={[5, 10, 20]}
         getRowId={(row) => row._id}
         checkboxSelection
         disableSelectionOnClick
+        components={{
+          Toolbar: GridToolbar,
+        }}
       />
     </div>
   );

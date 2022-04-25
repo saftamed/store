@@ -8,7 +8,7 @@ function CartProduit({item}) {
   return (
     <div className="item">
     <div className="pro">
-        <img src={item.img} alt=""/>
+        <img src={"http://localhost:4000/public/"+item.img} alt=""/>
     </div>
     <div className="details">
       <h3>{item.title}</h3>

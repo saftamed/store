@@ -1,9 +1,9 @@
-import { NotificationsNone, Settings, ExitToApp } from "@material-ui/icons";
+import { NotificationsNone, Settings, ExitToApp,Menu } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton, Button } from "@mui/material";
 
 import "../css/nav.css";
-import { logout } from "../store/userSlice";
+import { logout, toggleSlider } from "../store/userSlice";
 
 function NavBar() {
   const user = useSelector((state) => state.currentUser);
@@ -12,7 +12,11 @@ function NavBar() {
     <div className="nav">
       <div className="left">
         <div className="logo">
-          <h1>LTT Store</h1>
+            <IconButton aria-label="delete" size="large" onClick={() => dispatch(toggleSlider())} >
+              <Menu fontSize="inherit" />
+            </IconButton>
+          <h1>
+            LTT Store</h1>
         </div>
       </div>
       <div className="right">

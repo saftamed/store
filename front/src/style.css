@@ -407,7 +407,7 @@ body {
 }
 .img img {
   height: 100vh;
-  width: 100%;
+  /* width: 100%; */
   object-fit: cover;
 
 }
@@ -507,7 +507,10 @@ details p {
   font-weight: bold;
 }
 .img {
-  flex: 5;
+  flex: 4;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 /*  cart */

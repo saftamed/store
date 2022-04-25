@@ -7,7 +7,7 @@ function Produit({product}) {
         <Link to={`/produit/${product._id}`}>
 
       <img
-        src={product.img}
+        src={"http://localhost:4000/public/"+product.img}
         alt=""
       />
       <div>

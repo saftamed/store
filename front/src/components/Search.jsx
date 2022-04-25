@@ -48,7 +48,7 @@ function Search() {
             >
               <div className="search-item">
                 <div className="search-item-img">
-                  <img src={product.img} alt="" />
+                  <img src={"http://localhost:4000/public/"+product.img} alt="" />
                 </div>
                 <div className="search-item-info">
                   <h3>{product.title}</h3>

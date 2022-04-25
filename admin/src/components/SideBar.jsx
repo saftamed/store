@@ -5,21 +5,22 @@ import {
     LineStyle,
     Timeline,
     TrendingUp,
-    PermIdentity,
+    Category,
     Storefront,
-    AttachMoney,
-    BarChart,
-    MailOutline,
-    DynamicFeed,
-    ChatBubbleOutline,
-    WorkOutline,
+    AddBox,
+    PeopleAlt,
+    PersonAdd,
+    Subscriptions,
+    Comment,
     Report,
   } from "@material-ui/icons";
+import { useSelector } from 'react-redux';
 
 
 function SideBar() {
+  const sliderShow = useSelector((state) => state.sliderShow);
   return (
-      <div className="sidebar">
+      <div className="sidebar" style={{display:sliderShow?"block":"none"}} >
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3>Dashboard</h3>
@@ -45,13 +46,13 @@ function SideBar() {
           <ul >
             <NavLink  to="/products" className={({ isActive }) => (isActive ? "active" : "")}>
               <li >
-                <Storefront  />
+                <Category  />
                 Products
               </li>
             </NavLink>
             <NavLink  to="/product/add" className={({ isActive }) => (isActive ? "active" : "")}>
               <li >
-                <Storefront  />
+                <AddBox  />
                 Add Product
               </li>
             </NavLink>
@@ -63,13 +64,13 @@ function SideBar() {
           <ul >
           <NavLink  to="/users" className={({ isActive }) => (isActive ? "active" : "")} >
               <li >
-                <Storefront  />
+                <PeopleAlt  />
                 All Users
               </li>
             </NavLink>
             <NavLink  to="/user/add" className={({ isActive }) => (isActive ? "active" : "")} >
               <li >
-                <Storefront  />
+                <PersonAdd  />
                 Add User
               </li>
             </NavLink>
@@ -80,14 +81,17 @@ function SideBar() {
           <ul>
           <NavLink  to="/news" className={({ isActive }) => (isActive ? "active" : "")} >
               <li >
-                <Storefront  />
+                <Subscriptions  />
                 Show Subscribers
               </li>
             </NavLink>
-            <li >
-              <Timeline  />
-              Analytics
-            </li>
+          <NavLink  to="/comments" className={({ isActive }) => (isActive ? "active" : "")} >
+              <li >
+                <Comment  />
+                New Comments
+              </li>
+            </NavLink>
+
             <li >
               <Report />
               Reports
