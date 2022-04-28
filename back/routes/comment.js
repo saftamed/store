@@ -3,7 +3,6 @@ const Comment = require('../models/comment');
 const { checkLogin } = require("./userMidelWare");
 
 router.post("/", checkLogin, async (req, res) => {
-  console.log({...req.body, userId: req.user.id});
   const comment = new Comment({...req.body, userId: req.user.id});
   try {
     const savedComment = await comment.save();

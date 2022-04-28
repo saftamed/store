@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import CartProduit from '../components/CartProduit'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 
 function Cart() {
     const cart = useSelector((state) => state.cart);
@@ -40,9 +41,12 @@ function Cart() {
                       <span>Total</span>
                       <span>${Math.abs((cart.total).toFixed(2))}</span>
                   </div>
+                  <Link to={"/checkout"}>
                   <div className="btn">
                       Check Out
                   </div>
+                  
+                  </Link>
 
               </div>
           </div>

@@ -51,9 +51,12 @@ const userSlice = createSlice({
       };
     },setNotification: (state, action) => {
       state.notification = action.payload;
+    }
+    ,setLoading: (state, action) => {
+      state.isFetching = action.payload;
     },
-  },
+    },
 });
 
-export const { loginStart, loginSuccess, loginFailure,logout,reqSuccess,setNotification} = userSlice.actions;
+export const { loginStart, loginSuccess,setLoading, loginFailure,logout,reqSuccess,setNotification} = userSlice.actions;
 export default userSlice.reducer;

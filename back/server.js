@@ -43,9 +43,12 @@ app.use("/api/v1/product",productRoute)
 app.use("/api/v1/user",userRoute)
 
 app.use("/api/v1/auth",authRoute)
+app.use("/api/v1/order",require("./routes/order"))
 
 app.use("/api/v1/news",newsRoute)
 app.use("/api/v1/comments",require("./routes/comment"))
+app.use("/api/v1/checkout-pay",require("./routes/paypalck"))
+app.use("/api/v1/checkout-stripe",require("./routes/checkout-stripe"))
 
 
 app.listen(process.env.PORT || 3000, function () {
