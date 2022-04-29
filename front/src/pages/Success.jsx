@@ -11,18 +11,21 @@ function Success() {
     const nav = useNavigate();
     const user = useSelector((state) => state.user.currentUser);
     const loading = useSelector((state) => state.cart.loading);
+    const lastOrder = useSelector((state) => state.cart.lastOrder);
     const [dis, setDis] = useState(false)
     const {id} = useParams();
+    console.log(id)
     const dispatch = useDispatch();
 
 
     useEffect(() => {
         axios.defaults.headers.common['token'] = `Bearer ${user.accessToken }`;
         dispatch(setLoading(true));
+        const iid = id === "null" ? lastOrder : id;
         axios
           .post(
             "http://localhost:4000/api/v1/order/success",
-            {id},
+            {id:iid},
           )
           .then((res) => {
               setDis("block")
