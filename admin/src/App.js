@@ -15,6 +15,7 @@ import Users from "./pages/Users";
 import User from "./pages/User";
 import NewsSub from "./pages/NewsSub";
 import Comments from "./pages/Comments";
+import Sales from "./pages/Sales";
 
 // import "../node_modules/react-animate-on-scroll/dist/scrollAnimation.min.css";
 // // import "animate.css/animate.min.css";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/news" element={<NewsSub />} />
           <Route path="/user/:id" element={<User />} />
           <Route path="/comments" element={<Comments />} />
+          <Route path="/sales" element={<Sales />} />
         </Route>
         <Route path="/login" element={user===null?<Login />:<Navigate replace  to="/"/>} />
       </Routes>

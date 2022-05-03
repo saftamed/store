@@ -35,10 +35,13 @@ function SideBar() {
               <Timeline />
               Analytics
             </li>
+            <NavLink  to="/sales" className={({ isActive }) => (isActive ? "active" : "")}>
+
             <li >
               <TrendingUp />
               Sales
             </li>
+            </NavLink>
           </ul>
         </div>
         <div className="sidebarMenu">

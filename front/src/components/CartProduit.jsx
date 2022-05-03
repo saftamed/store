@@ -1,14 +1,17 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 import { changeQuantity, removeProduct } from "../store/cartSlice";
 
-function CartProduit({item}) {
+function CartProduit({item,noShow}) {
   const dispatch = useDispatch();
   
   return (
     <div className="item">
     <div className="pro">
+      <NavLink to={`/produit/${item._id}`}>
         <img src={"http://localhost:4000/public/"+item.img} alt=""/>
+      </NavLink>
     </div>
     <div className="details">
       <h3>{item.title}</h3>
@@ -22,7 +25,9 @@ function CartProduit({item}) {
     <div className="tot">
       <p>PRICE USD</p>
       <div className="price">${Math.abs((item.price* item.quantity).toFixed(2))} USD</div>
+        {  noShow === false? (<>
       <div className="qte">
+
          <button onClick={()=>dispatch(changeQuantity({id:item.iid,qte:-1}))}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-dash-circle" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -39,6 +44,16 @@ function CartProduit({item}) {
 
       </div>
       <button onClick={()=>dispatch(removeProduct({id:item.iid}))}>Remove</button>
+        </>)
+        
+        : (
+          <div>
+            <span>Quantity : </span>
+          <span>{item.quantity}</span>
+          </div>
+        )
+        
+        }
     </div>
 </div>
   )

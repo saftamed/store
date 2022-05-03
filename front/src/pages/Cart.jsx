@@ -15,7 +15,7 @@ function Cart() {
           <div className="content">
               <div className="items">
                   {
-                        cart.products.map(item => <CartProduit key={item._id+item.iid} item={item}/>)
+                        cart.products.map(item => <CartProduit key={item._id+item.iid} item={item} noShow={false}/>)
                   }
               </div>
               <div className="checkout">
